@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveObstacles : MonoBehaviour
+public class MoveObstacle : MonoBehaviour
 {
     public enum Directions
     {
@@ -42,6 +42,5 @@ public class MoveObstacles : MonoBehaviour
     private void OnEnable()
     {
         transform.position = ChooseSpawnLocation.instance.RandomSpawnLocation().position;
-
     }
 }
