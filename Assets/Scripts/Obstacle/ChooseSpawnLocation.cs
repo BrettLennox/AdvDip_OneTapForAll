@@ -14,9 +14,10 @@ public class ChooseSpawnLocation : MonoBehaviour
     public Transform ChosenSpawnLocation { get => _chosenSpawnLocation; }
     #endregion
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
+        _chosenSpawnLocation = _spawnLocations[0].transform;
     }
 
     public Transform RandomSpawnLocation()
