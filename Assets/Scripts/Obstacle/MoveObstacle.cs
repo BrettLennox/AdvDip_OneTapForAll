@@ -12,7 +12,9 @@ public class MoveObstacle : MonoBehaviour
     #region Variables
     [SerializeField] private Directions _direction;
     [SerializeField] private Vector3 _directionToMove;
-    [SerializeField] private float _speed, _baseMoveSpeed, _slowMoveSpeed;
+    [SerializeField] private float _moveAcrossStreetSpeed = 2;
+    [SerializeField] private float _speed;
+    [SerializeField] [Range(1, 5)] private int _speedFilter = 2;
     #endregion
     #region Properties
     public float Speed { get => _speed; }
@@ -23,15 +25,15 @@ public class MoveObstacle : MonoBehaviour
     {
         _directionToMove = _direction == Directions.Left ? Vector3.back : Vector3.forward;
 
+        _speed = SetSpeed.instance.Speed * _speedFilter;
         MoveObstacelAcrossStreet();
         MoveObstacleTowardsPlayer(_speed);
 
-        _speed = PlayerBrake.instance.IsBraking ? _slowMoveSpeed : _baseMoveSpeed;
     }
 
     private void MoveObstacelAcrossStreet()
     {
-        transform.Translate(_directionToMove * (2 * Time.deltaTime));
+        transform.Translate(_directionToMove * (_moveAcrossStreetSpeed * Time.deltaTime));
     }
 
     private void MoveObstacleTowardsPlayer(float speed)

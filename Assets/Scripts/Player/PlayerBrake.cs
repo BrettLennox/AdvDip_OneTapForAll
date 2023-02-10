@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerBrake : MonoBehaviour
 {
-    public static PlayerBrake instance;
-
     #region Variables
     [SerializeField] private bool _isBraking, _canBrake;
     [SerializeField] private float _brakeTime;
@@ -16,12 +14,6 @@ public class PlayerBrake : MonoBehaviour
     public float BrakeTime { get => _brakeTime; }
     public float MaximumBrakeAllowance { get => _maximumBrakeAllowance; }
     #endregion
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        instance = this;
-    }
 
     // Update is called once per frame
     void Update()
