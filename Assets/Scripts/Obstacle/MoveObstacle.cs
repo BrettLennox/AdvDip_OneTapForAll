@@ -23,12 +23,12 @@ public class MoveObstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _directionToMove = _direction == Directions.Left ? Vector3.back : Vector3.forward;
-
-        _speed = SetSpeed.instance.Speed * _speedFilter;
-        MoveObstacelAcrossStreet();
-        MoveObstacleTowardsPlayer(_speed);
-
+        if(GameManager.instance.GameState == GameManager.GameStates.Play)
+        {
+            _speed = SetSpeed.instance.Speed * _speedFilter;
+            MoveObstacelAcrossStreet();
+            MoveObstacleTowardsPlayer(_speed);
+        }
     }
 
     private void MoveObstacelAcrossStreet()
@@ -44,5 +44,7 @@ public class MoveObstacle : MonoBehaviour
     private void OnEnable()
     {
         transform.position = ChooseSpawnLocation.instance.RandomSpawnLocation().position;
+        _direction = ChooseSpawnLocation.instance.ReturnRandomSpawnLocation() == 0 ? Directions.Right : Directions.Left;
+        _directionToMove = _direction == Directions.Left ? Vector3.back : Vector3.forward;
     }
 }

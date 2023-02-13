@@ -8,6 +8,7 @@ public class ChooseSpawnLocation : MonoBehaviour
 
     #region Variables
     [SerializeField] private List<GameObject> _spawnLocations;
+    private int _randomNumber;
     [SerializeField] Transform _chosenSpawnLocation;
     #endregion
     #region Properties
@@ -22,7 +23,12 @@ public class ChooseSpawnLocation : MonoBehaviour
 
     public Transform RandomSpawnLocation()
     {
-        int randomNumber = Random.Range(0, _spawnLocations.Count);
-        return _chosenSpawnLocation = _spawnLocations[randomNumber].transform;
+        _randomNumber = Random.Range(0, _spawnLocations.Count);
+        return _spawnLocations[_randomNumber].transform;
+    }
+
+    public int ReturnRandomSpawnLocation()
+    {
+        return _randomNumber;
     }
 }

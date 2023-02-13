@@ -10,7 +10,10 @@ public class Timer : MonoBehaviour
     #endregion
     private void FixedUpdate()
     {
-        TimerFunction();
+        if(GameManager.instance.GameState == GameManager.GameStates.Play)
+        {
+            TimerFunction();
+        }
     }
 
     private void TimerFunction()
