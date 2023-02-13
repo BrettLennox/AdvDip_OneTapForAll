@@ -5,9 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(ScoreManager))]
 public class Timer : MonoBehaviour
 {
+    public static Timer instance;
     #region Variables
-    [SerializeField] private float timer;
+    [SerializeField] private float _counter;
     #endregion
+    #region Properties
+    public float Counter { get => _counter; set => _counter = value; }
+    #endregion
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void FixedUpdate()
     {
         if(GameManager.instance.GameState == GameManager.GameStates.Play)
@@ -18,11 +27,6 @@ public class Timer : MonoBehaviour
 
     private void TimerFunction()
     {
-        timer += Time.deltaTime;
-        if(timer >= 1)
-        {
-            ScoreManager.instance.UpdateScore(1);
-            timer = 0;
-        }
+        _counter += Time.deltaTime;
     }
 }

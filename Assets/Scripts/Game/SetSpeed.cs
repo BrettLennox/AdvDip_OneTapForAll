@@ -8,7 +8,7 @@ public class SetSpeed : MonoBehaviour
     public static SetSpeed instance;
 
     #region Variables
-    [SerializeField] private float _speed, _baseSpeed, _slowSpeed;
+    [SerializeField] private float _speed, _baseSpeed, _slowSpeed, _boostSpeed;
     private PlayerBrake _playerBrake;
     #endregion
     #region Properties
@@ -25,11 +25,11 @@ public class SetSpeed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AdjustSpeed();
+        AdjustSpeed(PlayerBrake.instance.IsBoosting);
     }
 
-    private void AdjustSpeed()
+    private void AdjustSpeed(bool isBoosting)
     {
-        _speed = _playerBrake.IsBraking ? _slowSpeed : _baseSpeed;
+        _speed = isBoosting ? _boostSpeed : _playerBrake.IsBraking ? _slowSpeed : _baseSpeed;
     }
 }

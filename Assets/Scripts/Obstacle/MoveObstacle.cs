@@ -43,6 +43,7 @@ public class MoveObstacle : MonoBehaviour
 
     private void OnEnable()
     {
+        _moveAcrossStreetSpeed = Random.Range(1, 4);
         transform.position = ChooseSpawnLocation.instance.RandomSpawnLocation().position;
         _direction = ChooseSpawnLocation.instance.ReturnRandomSpawnLocation() == 0 ? Directions.Right : Directions.Left;
         _directionToMove = _direction == Directions.Left ? Vector3.back : Vector3.forward;

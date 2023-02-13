@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Timer))]
 public class ObstacleSpawnManager : MonoBehaviour
 {
     #region Variables
     [SerializeField] private GameObject _obstacleGO;
-    [SerializeField] private float _timer;
     [SerializeField] private float _randomSpawnTime;
     [SerializeField] float _spawnMin, _spawnMax;
     #endregion
@@ -16,17 +16,15 @@ public class ObstacleSpawnManager : MonoBehaviour
     {
         if(GameManager.instance.GameState == GameManager.GameStates.Play)
         {
-            _timer += Time.deltaTime;
-
             SpawnObstacle();
         }
     }
 
     private void SpawnObstacle()
     {
-        if(_timer >= _randomSpawnTime)
+        if(Timer.instance.Counter >= _randomSpawnTime)
         {
-            _timer = 0;
+            Timer.instance.Counter = 0;
             Instantiate(_obstacleGO);
             _randomSpawnTime = Random.Range(_spawnMin, _spawnMin);
         }
